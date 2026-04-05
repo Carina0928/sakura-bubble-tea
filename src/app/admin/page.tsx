@@ -132,20 +132,47 @@ const THEMES = [
 
 // ════════════════ COMPONENTS ════════════════
 
+// ── Upload helper ────────────────────────────────────────────
+async function uploadToImgBB(base64: string): Promise<string> {
+  const res = await fetch('/api/upload', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ image: base64 }),
+  })
+  const data = await res.json()
+  if (!data.success) throw new Error(data.error || 'Upload failed')
+  return data.url
+}
+
 function Img({ label, value, onChange }: { label: string; value: string; onChange: (v: string) => void }) {
   const ref = useRef<HTMLInputElement>(null)
-  const onFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const [uploading, setUploading] = useState(false)
+  const onFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const f = e.target.files?.[0]; if (!f) return
-    const r = new FileReader(); r.onload = ev => onChange(ev.target?.result as string); r.readAsDataURL(f)
+    const r = new FileReader()
+    r.onload = async (ev) => {
+      const base64 = ev.target?.result as string
+      setUploading(true)
+      try {
+        const url = await uploadToImgBB(base64)
+        onChange(url)
+      } catch (err) {
+        alert('Eroare la upload imagine. Încearcă din nou.')
+        console.error(err)
+      } finally {
+        setUploading(false)
+      }
+    }
+    r.readAsDataURL(f)
   }
   return (
     <div className="mb-3">
       <p className="text-xs font-bold uppercase tracking-wider mb-1.5" style={{ color:'#be185d' }}>{label}</p>
-      {value && <img src={value} className="w-full h-28 object-cover rounded-xl mb-2 border border-pink-100" alt="" />}
-      <button onClick={() => ref.current?.click()}
-        className="w-full py-2 text-xs font-bold border-2 border-dashed rounded-xl mb-1.5 hover:bg-pink-50 transition-colors"
+      {value && !value.startsWith('data:') && <img src={value} className="w-full h-28 object-cover rounded-xl mb-2 border border-pink-100" alt="" />}
+      <button onClick={() => ref.current?.click()} disabled={uploading}
+        className="w-full py-2 text-xs font-bold border-2 border-dashed rounded-xl mb-1.5 hover:bg-pink-50 transition-colors disabled:opacity-50"
         style={{ borderColor:'#f90b5a', color:'#f90b5a' }}>
-        📤 Upload fotografie din calculator
+        {uploading ? '⏳ Se încarcă...' : '📤 Upload fotografie din calculator'}
       </button>
       <input ref={ref} type="file" accept="image/*" onChange={onFile} className="hidden" />
       <input value={value} onChange={e => onChange(e.target.value)} placeholder="Sau lipește URL imagine..."
@@ -215,17 +242,36 @@ function ProductImgCard({ product, currentImg, onUpdate }: {
   product: typeof ALL_PRODUCTS[0]; currentImg: string; onUpdate: (id:string, url:string) => void
 }) {
   const ref = useRef<HTMLInputElement>(null)
-  const onFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const [uploading, setUploading] = useState(false)
+  const onFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const f = e.target.files?.[0]; if (!f) return
     const r = new FileReader()
-    r.onload = ev => onUpdate(product.id, ev.target?.result as string)
+    r.onload = async (ev) => {
+      const base64 = ev.target?.result as string
+      setUploading(true)
+      try {
+        const url = await uploadToImgBB(base64)
+        onUpdate(product.id, url)
+      } catch (err) {
+        alert('Eroare la upload imagine.')
+        console.error(err)
+      } finally {
+        setUploading(false)
+      }
+    }
     r.readAsDataURL(f)
   }
   return (
     <div className="border rounded-2xl overflow-hidden bg-white shadow-sm hover:shadow-md transition-shadow" style={{ borderColor:'#fce7f3' }}>
       <div className="relative group">
-        <img src={currentImg} alt={product.name} className="w-full h-32 object-cover" />
-        <button onClick={() => ref.current?.click()}
+        {uploading ? (
+          <div className="w-full h-32 flex items-center justify-center bg-pink-50">
+            <span className="text-sm font-bold" style={{ color:'#f90b5a' }}>⏳ Se încarcă...</span>
+          </div>
+        ) : (
+          <img src={currentImg} alt={product.name} className="w-full h-32 object-cover" />
+        )}
+        <button onClick={() => ref.current?.click()} disabled={uploading}
           className="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
           style={{ background:'rgba(249,11,90,0.8)' }}>
           <span className="text-2xl">📤</span>
