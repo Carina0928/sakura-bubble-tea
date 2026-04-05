@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Great+Vibes&family=Dancing+Script:wght@400;500&family=Lato:wght@300;400;700&family=Poppins:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600&family=Nunito:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  background: #fff5f8;
+  min-height: 100vh;
+  color: #2d1b24;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse at 10% 10%, rgba(249,11,90,0.03) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+* { position: relative; }
+
+@layer base {
+  h1, h2, h3 { font-family: 'Cormorant Garamond', serif; }
+}
+
+@layer utilities {
+  .animation-delay-100 { animation-delay: 100ms; }
+  .animation-delay-200 { animation-delay: 200ms; }
+  .animation-delay-300 { animation-delay: 300ms; }
+  .animation-delay-400 { animation-delay: 400ms; }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #fff0f5; }
+::-webkit-scrollbar-thumb { background: #f90b5a; border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: #c4004a; }
