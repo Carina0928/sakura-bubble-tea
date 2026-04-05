@@ -105,8 +105,9 @@ function generateSiteConfigTS(config: any): string {
         if (typeof val === 'number') {
           lines.push(`    ${key}: ${val},`);
         } else {
-          // Escape single quotes and newlines in strings
-          const escaped = String(val).replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/\n/g, '\\n');
+          // Escape for single-quoted JS string: only escape actual single quotes and newlines
+          const str = String(val)
+          const escaped = str.split("'").join("\\'").split('\n').join('\\n')
           lines.push(`    ${key}: '${escaped}',`);
         }
         usedKeys.add(key);
@@ -123,7 +124,7 @@ function generateSiteConfigTS(config: any): string {
       if (typeof val === 'number') {
         lines.push(`    ${key}: ${val},`);
       } else if (typeof val === 'string') {
-        const escaped = String(val).replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/\n/g, '\\n');
+        const escaped = String(val).split("'").join("\\'").split('\n').join('\\n');
         lines.push(`    ${key}: '${escaped}',`);
       }
     }
