@@ -1,6 +1,6 @@
 'use client'
 import Link from 'next/link'
-import Image from 'next/image'
+// Image replaced with img for external URL support
 import { ArrowRight } from 'lucide-react'
 import { useLanguage } from '@/lib/LanguageContext'
 import { SITE_CONFIG as C } from '@/lib/siteConfig'
@@ -70,7 +70,7 @@ export default function HeroSection() {
             <div className="relative z-10 flex flex-col items-center">
               <div className="relative w-80 h-80 rounded-full overflow-hidden"
                 style={{ border: '4px solid rgba(255,255,255,0.9)', boxShadow: `0 20px 60px ${C.primaryColor}33` }}>
-                <Image src={C.mainCircleImage} alt="Sakura Bubble Tea" fill className="object-cover" sizes="320px" />
+                <img src={C.mainCircleImage} alt="Sakura Bubble Tea" className="absolute inset-0 w-full h-full object-cover" />
                 <div className="absolute inset-0" style={{ background: `linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 45%, ${C.primaryColor}18 100%)` }} />
               </div>
               <div className="mt-4 text-white text-xs font-semibold px-5 py-2 rounded-full shadow-lg"
@@ -86,7 +86,7 @@ export default function HeroSection() {
                 <div key={i} className={`${pos} z-20 flex flex-col items-center`}>
                   <div className={`relative ${i === 1 ? 'w-28 h-28' : 'w-24 h-24'} rounded-full overflow-hidden`}
                     style={{ border: '3px solid rgba(255,255,255,0.9)', boxShadow: `0 8px 24px ${C.primaryColor}33` }}>
-                    <Image src={img} alt={label} fill className="object-cover" sizes="96px" />
+                    <img src={img} alt={label} className="absolute inset-0 w-full h-full object-cover" />
                   </div>
                   <p className="text-xs font-medium mt-1.5 drop-shadow" style={{ color: C.primaryColor }}>{label}</p>
                 </div>

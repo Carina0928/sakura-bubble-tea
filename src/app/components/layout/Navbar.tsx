@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation'
 import { Menu, X } from 'lucide-react'
 import { useLanguage } from '@/lib/LanguageContext'
 import LanguageSwitcher from '@/app/components/ui/LanguageSwitcher'
-import Image from 'next/image'
+// Image replaced with img
 import clsx from 'clsx'
 import { SITE_CONFIG as C } from '@/lib/siteConfig'
 
@@ -39,7 +39,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-20">
           <Link href="/" className="flex items-center shrink-0">
             <div className="relative shrink-0" style={{ width: `${C.navbarLogoSize}px`, height: `${Math.round(C.navbarLogoSize * 0.6)}px` }}>
-              <Image src="/images/logo.png" alt="Sakura Bubble Tea" fill className="object-contain" sizes={`${C.navbarLogoSize}px`} priority />
+              <img src="/images/logo.png" alt="Sakura Bubble Tea" className="absolute inset-0 w-full h-full object-contain" />
             </div>
           </Link>
           <nav className="hidden lg:flex items-center gap-7">

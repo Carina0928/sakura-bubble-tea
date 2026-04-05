@@ -71,6 +71,26 @@ function generateSiteConfigTS(config: any): string {
     }
   }
 
+  // Ensure these fields always exist (admin panel may not manage them all)
+  const defaults: Record<string, string> = {
+    accentColor: '#ffc2d4',
+    aboutBg: 'linear-gradient(180deg, #fff5f8 0%, #ffe8f0 100%)',
+    aboutBgColor: '#fff5f8',
+    aboutQuote: 'Când cineva cumpără de la Sakura Bubble Tea, nu cumpără doar o băutură. Cumpără un moment de bucurie.',
+    aboutCta: '„Vino să descoperi gustul autentic."',
+    aboutP3: 'Fiecare produs este creat cu precizie — de la selecția ceaiului, la textura perfectă a perlelor de tapioca și echilibrul fin al aromelor.',
+    aboutBrandSlogan: 'Nu vindem doar băuturi. Creăm experiențe premium.',
+    productsBg: 'linear-gradient(180deg, #fff5f8 0%, #ffe8f0 100%)',
+    contactBg: 'linear-gradient(180deg, #fff5f8 0%, #ffe8f0 100%)',
+    contactBgColor: '#fff5f8',
+    featuresBg: 'linear-gradient(150deg, #ffffff 0%, #ffe0ec 30%, #f90b5a 100%)',
+    featuresTextColor: '#ffffff',
+    navbarBtnRadius: '9999px',
+  };
+  
+  // Merge: admin values override defaults
+  const merged = { ...defaults, ...cleanConfig };
+
   const lines: string[] = [];
   lines.push('// ═══════════════════════════════════════════════════════════════');
   lines.push('// SITE CONFIG — auto-updated by admin panel');
@@ -100,8 +120,8 @@ function generateSiteConfigTS(config: any): string {
   for (const [sectionName, keys] of Object.entries(sections)) {
     lines.push(`    // — ${sectionName} ${'─'.repeat(Math.max(0, 50 - sectionName.length))}`);
     for (const key of keys) {
-      if (key in cleanConfig) {
-        const val = cleanConfig[key];
+      if (key in merged) {
+        const val = merged[key];
         if (typeof val === 'number') {
           lines.push(`    ${key}: ${val},`);
         } else {
@@ -116,11 +136,11 @@ function generateSiteConfigTS(config: any): string {
   }
 
   // Add any remaining keys not in sections
-  const remainingKeys = Object.keys(cleanConfig).filter(k => !usedKeys.has(k));
+  const remainingKeys = Object.keys(merged).filter(k => !usedKeys.has(k));
   if (remainingKeys.length > 0) {
     lines.push('    // — Other ──────────────────────────────────────────');
     for (const key of remainingKeys) {
-      const val = cleanConfig[key];
+      const val = merged[key];
       if (typeof val === 'number') {
         lines.push(`    ${key}: ${val},`);
       } else if (typeof val === 'string') {

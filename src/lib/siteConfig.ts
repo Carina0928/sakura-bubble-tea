@@ -73,8 +73,18 @@ export const SITE_CONFIG = {
     ctaBg: 'linear-gradient(150deg, #ffffff 0%, #ffe0ec 30%, #f90b5a 100%)',
     ctaTextColor: '#ffffff',
     // — Features Section ──────────────────────────────────
+    featuresBg: 'linear-gradient(150deg, #ffffff 0%, #ffe0ec 30%, #f90b5a 100%)',
+    featuresTextColor: '#ffffff',
     // — Other ──────────────────────────────────────────
+    aboutBg: 'linear-gradient(180deg, #fff5f8 0%, #ffe8f0 100%)',
     aboutBgColor: '#fff5f8',
+    aboutQuote: 'Când cineva cumpără de la Sakura Bubble Tea, nu cumpără doar o băutură. Cumpără un moment de bucurie.',
+    aboutCta: '„Vino să descoperi gustul autentic."',
+    aboutP3: 'Fiecare produs este creat cu precizie — de la selecția ceaiului, la textura perfectă a perlelor de tapioca și echilibrul fin al aromelor.',
+    aboutBrandSlogan: 'Nu vindem doar băuturi. Creăm experiențe premium.',
+    productsBg: 'linear-gradient(180deg, #fff5f8 0%, #ffe8f0 100%)',
+    contactBg: 'linear-gradient(180deg, #fff5f8 0%, #ffe8f0 100%)',
+    contactBgColor: '#fff5f8',
 } as const
 
 export type SiteConfig = typeof SITE_CONFIG

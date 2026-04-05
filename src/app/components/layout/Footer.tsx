@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { MapPin, Mail, Clock, Instagram, Facebook } from 'lucide-react'
 import { company } from '@/data/company'
 import { useLanguage } from '@/lib/LanguageContext'
-import Image from 'next/image'
+// Image replaced with img
 import { SITE_CONFIG as C } from '@/lib/siteConfig'
 
 export default function Footer() {
@@ -14,7 +14,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           <div>
             <div className="relative w-32 h-16 mb-4">
-              <Image src="/images/logo.png" alt="Sakura Bubble Tea" fill className="object-contain" sizes="128px" />
+              <img src="/images/logo.png" alt="Sakura Bubble Tea" className="absolute inset-0 w-full h-full object-contain" />
             </div>
             <p className="text-sm leading-relaxed mb-6" style={{ color: `${C.footerTextColor}cc` }}>{C.footerTagline}</p>
             <div className="flex gap-3">

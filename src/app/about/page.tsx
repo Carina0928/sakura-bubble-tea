@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import Image from 'next/image'
+// Image replaced with img
 import Link from 'next/link'
 import { ArrowRight, Leaf, Hammer, Sparkles, Shield } from 'lucide-react'
 import { useLanguage } from '@/lib/LanguageContext'
@@ -44,7 +44,7 @@ export default function AboutPage() {
             <div className="relative">
               <div className="relative aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl"
                 style={{ border: `3px solid ${C.primaryColor}22` }}>
-                <Image src={C.aboutImage} alt="Sakura Bubble Tea" fill className="object-cover" sizes="50vw" />
+                <img src={C.aboutImage} alt="Sakura Bubble Tea" className="absolute inset-0 w-full h-full object-cover" />
                 <div className="absolute inset-0" style={{ background: `linear-gradient(to top, ${C.primaryColor}44 0%, transparent 60%)` }} />
               </div>
               <div className="absolute -bottom-5 -right-4 rounded-2xl px-6 py-4 shadow-xl text-center"

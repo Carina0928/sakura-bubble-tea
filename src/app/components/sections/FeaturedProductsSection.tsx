@@ -1,7 +1,7 @@
 'use client'
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
-import Image from 'next/image'
+// Image replaced with img
 import { getFeaturedProducts } from '@/data/products'
 import { useLanguage } from '@/lib/LanguageContext'
 import { localize } from '@/types/product'
@@ -27,7 +27,7 @@ export default function FeaturedProductsSection() {
                 className="group flex flex-col items-center hover:-translate-y-2 transition-all duration-300">
                 <div className="relative w-full aspect-square rounded-3xl overflow-hidden mb-3 shadow-md group-hover:shadow-xl transition-shadow"
                   style={{ background: C.productsCardBg, border: `1.5px solid ${C.productsCardBorder}` }}>
-                  <Image src={product.image} alt={name} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="25vw" />
+                  <img src={product.image} alt={name} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                   <div className="absolute inset-0" style={{ background: `linear-gradient(to top, ${C.primaryColor}33 0%, transparent 60%)` }} />
                   {product.badge && (
                     <div className="absolute top-2 right-2 text-white text-xs font-semibold px-2.5 py-1 rounded-full shadow"

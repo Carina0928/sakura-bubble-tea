@@ -1,6 +1,6 @@
 'use client'
 
-import Image from 'next/image'
+// Image replaced with img
 import Link from 'next/link'
 import { notFound, useParams } from 'next/navigation'
 import { ArrowLeft, Check, Clock, MapPin, Star } from 'lucide-react'
@@ -50,10 +50,7 @@ export default function ProductDetailPage() {
           <div>
             <div className="relative aspect-square rounded-3xl overflow-hidden shadow-2xl"
               style={{ border: `3px solid ${C.primaryColor}22` }}>
-              <Image
-                src={product.image} alt={name} fill priority
-                className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw"
-              />
+              <img src={product.image} alt={name} className="absolute inset-0 w-full h-full object-cover" />
               <div className="absolute inset-0"
                 style={{ background: `linear-gradient(to top, ${C.primaryColor}33 0%, transparent 60%)` }} />
               {product.badge && (
@@ -75,7 +72,7 @@ export default function ProductDetailPage() {
                 {product.images.map((img, i) => (
                   <div key={i} className="relative aspect-square rounded-2xl overflow-hidden border-2 cursor-pointer transition-all hover:scale-105"
                     style={{ borderColor: `${C.primaryColor}44` }}>
-                    <Image src={img} alt={`${name} ${i+1}`} fill className="object-cover" sizes="25vw" />
+                    <img src={img} alt={`${name} ${i+1}`} className="absolute inset-0 w-full h-full object-cover" />
                   </div>
                 ))}
               </div>

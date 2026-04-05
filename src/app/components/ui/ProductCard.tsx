@@ -1,5 +1,5 @@
 'use client'
-import Image from 'next/image'
+// Image replaced with img
 import Link from 'next/link'
 import { Product, localize } from '@/types/product'
 import { useLanguage } from '@/lib/LanguageContext'
@@ -14,7 +14,7 @@ export default function ProductCard({ product }: { product: Product }) {
       className="group flex flex-col rounded-3xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
       style={{ background: C.productsCardBg, border: `1.5px solid ${C.productsCardBorder}`, boxShadow: `0 4px 20px ${C.primaryColor}18` }}>
       <div className="relative aspect-square overflow-hidden">
-        <Image src={product.image} alt={name} fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="25vw" />
+        <img src={product.image} alt={name} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
         <div className="absolute inset-0" style={{ background: `linear-gradient(to top, ${C.primaryColor}33 0%, transparent 50%)` }} />
         {product.badge && (
           <div className="absolute top-2.5 right-2.5 text-white text-xs font-semibold px-2.5 py-1 rounded-full shadow"
