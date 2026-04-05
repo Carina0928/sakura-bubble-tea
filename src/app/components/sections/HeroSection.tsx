@@ -1,6 +1,5 @@
 'use client'
 import Link from 'next/link'
-// Image replaced with img for external URL support
 import { ArrowRight } from 'lucide-react'
 import { useLanguage } from '@/lib/LanguageContext'
 import { SITE_CONFIG as C } from '@/lib/siteConfig'
@@ -32,36 +31,66 @@ export default function HeroSection() {
               <span className="text-xs tracking-widest" style={{ color: C.heroTextColor, opacity: 0.6 }}>Brașov · România</span>
             </div>
             <h1 className="font-display font-light leading-tight mb-5" style={{ fontFamily: C.fontHeading }}>
-              <span className="block text-6xl sm:text-7xl drop-shadow-sm" style={{ color: C.heroTitleColor }}>{C.heroTitle}</span>
-              <span className="block text-3xl sm:text-4xl italic mt-1" style={{ color: C.heroTextColor, opacity: 0.85 }}>{C.heroSubtitle}</span>
-              <span className="block text-lg font-light mt-3 tracking-wider" style={{ color: C.heroTextColor, opacity: 0.7 }}>{C.heroTagline}</span>
+              <span className="block text-5xl sm:text-6xl lg:text-7xl drop-shadow-sm" style={{ color: C.heroTitleColor }}>{C.heroTitle}</span>
+              <span className="block text-2xl sm:text-3xl lg:text-4xl italic mt-1" style={{ color: C.heroTextColor, opacity: 0.85 }}>{C.heroSubtitle}</span>
+              <span className="block text-base lg:text-lg font-light mt-3 tracking-wider" style={{ color: C.heroTextColor, opacity: 0.7 }}>{C.heroTagline}</span>
             </h1>
-            <p className="text-base leading-relaxed mb-8 max-w-sm mx-auto lg:mx-0" style={{ color: C.heroTextColor, opacity: 0.75, fontFamily: C.fontBody }}>
+
+            {/* Mobile image - show on small screens only */}
+            <div className="flex lg:hidden justify-center mb-8">
+              <div className="relative">
+                <div className="relative w-48 h-48 sm:w-56 sm:h-56 rounded-full overflow-hidden mx-auto"
+                  style={{ border: '4px solid rgba(255,255,255,0.9)', boxShadow: `0 12px 40px ${C.primaryColor}33` }}>
+                  <img src={C.mainCircleImage} alt="Sakura Bubble Tea" className="w-full h-full object-cover" />
+                </div>
+                {/* Small circles on mobile */}
+                <div className="absolute -top-3 -left-3 w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden"
+                  style={{ border: '3px solid rgba(255,255,255,0.9)', boxShadow: `0 4px 16px ${C.primaryColor}33` }}>
+                  <img src={C.smallCircle1Image} alt={C.smallCircle1Label} className="w-full h-full object-cover" />
+                </div>
+                <div className="absolute -top-4 -right-3 w-18 h-18 sm:w-22 sm:h-22 rounded-full overflow-hidden"
+                  style={{ width: '4.5rem', height: '4.5rem', border: '3px solid rgba(255,255,255,0.9)', boxShadow: `0 4px 16px ${C.primaryColor}33` }}>
+                  <img src={C.smallCircle2Image} alt={C.smallCircle2Label} className="w-full h-full object-cover" />
+                </div>
+                <div className="absolute bottom-0 -right-5 w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden"
+                  style={{ border: '3px solid rgba(255,255,255,0.9)', boxShadow: `0 4px 16px ${C.primaryColor}33` }}>
+                  <img src={C.smallCircle3Image} alt={C.smallCircle3Label} className="w-full h-full object-cover" />
+                </div>
+                <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 text-white text-xs font-semibold px-4 py-1.5 rounded-full shadow-lg whitespace-nowrap"
+                  style={{ background: `linear-gradient(135deg, ${C.primaryColor}, ${C.primaryColor}cc)` }}>
+                  🌸 Taiwan Authentic
+                </div>
+              </div>
+            </div>
+
+            <p className="text-sm sm:text-base leading-relaxed mb-8 max-w-sm mx-auto lg:mx-0" style={{ color: C.heroTextColor, opacity: 0.75, fontFamily: C.fontBody }}>
               {C.heroDescription.split('40+ arome').map((part, i, arr) => i < arr.length - 1
                 ? <span key={i}>{part}<span className="font-semibold" style={{ color: C.primaryColor }}>40+ arome</span></span>
                 : <span key={i}>{part}</span>)}
             </p>
             <div className="flex flex-wrap gap-3 justify-center lg:justify-start mb-10">
               <Link href="/products"
-                className="group inline-flex items-center gap-2 px-8 py-3.5 text-sm font-semibold shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300"
+                className="group inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-3.5 text-sm font-semibold shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300"
                 style={{ background: C.heroBtnColor, color: C.heroBtnTextColor, borderRadius: C.heroBtnRadius }}>
                 {t('hero.cta.explore')} <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link href="/contact"
-                className="inline-flex items-center gap-2 px-8 py-3.5 text-sm font-medium border-2 transition-all hover:opacity-90"
+                className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-3.5 text-sm font-medium border-2 transition-all hover:opacity-90"
                 style={{ borderColor: C.primaryColor, color: C.primaryColor, background: 'rgba(255,255,255,0.8)', borderRadius: C.heroBtnRadius }}>
                 📍 Găsește-ne
               </Link>
             </div>
-            <div className="flex flex-wrap gap-8 justify-center lg:justify-start pt-8 border-t" style={{ borderColor: `${C.primaryColor}22` }}>
+            <div className="flex flex-wrap gap-6 sm:gap-8 justify-center lg:justify-start pt-8 border-t" style={{ borderColor: `${C.primaryColor}22` }}>
               {[[C.stat1Value,C.stat1Label],[C.stat2Value,C.stat2Label],[C.stat3Value,C.stat3Label]].map(([v,l])=>(
                 <div key={l} className="text-center">
-                  <p className="font-display text-3xl font-light drop-shadow" style={{ color: C.heroTitleColor, fontFamily: C.fontHeading }}>{v}</p>
+                  <p className="font-display text-2xl sm:text-3xl font-light drop-shadow" style={{ color: C.heroTitleColor, fontFamily: C.fontHeading }}>{v}</p>
                   <p className="text-xs uppercase tracking-widest mt-0.5" style={{ color: C.heroTextColor, opacity: 0.6 }}>{l}</p>
                 </div>
               ))}
             </div>
           </div>
+
+          {/* Desktop circles - hidden on mobile */}
           <div className="hidden lg:flex items-center justify-center relative h-[520px]">
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
               <div className="w-96 h-96 rounded-full" style={{ border: `1.5px solid ${C.primaryColor}33`, animation: 'spin 45s linear infinite' }} />
