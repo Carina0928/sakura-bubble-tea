@@ -1,6 +1,6 @@
 // ═══════════════════════════════════════════════════════════════
 // SITE CONFIG — auto-updated by admin panel
-// Last updated: 2026-04-05T12:33:38.096Z
+// Last updated: 2026-04-05T12:34:36.991Z
 // ═══════════════════════════════════════════════════════════════
 
 export const SITE_CONFIG = {
@@ -24,7 +24,7 @@ export const SITE_CONFIG = {
     heroDescription: 'Nu este doar bubble tea. Este o experiență. Ingrediente premium, rețete originale și peste 50 de arome care te fac să revii din nou și din nou.',
     heroBg: 'linear-gradient(150deg, #ffffff 0%, #ffc2d4 30%, #f90b5a 100%)',
     heroBgType: 'image',
-    heroBgImage: 'https://i.ibb.co/F4LCJr5L/cd1a0545312b.jpg',
+    heroBgImage: 'https://i.ibb.co/6cBBtZqY/e1951d31b511.jpg',
     heroTitleColor: '#f90b5a',
     heroTextColor: '#fcfcfc',
     heroBtnColor: '#f90b5a',
